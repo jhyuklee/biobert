@@ -1,11 +1,11 @@
 # OUTPUT_DIR = QA_output
 CKPT_DIR = 7B_500
-OUTPUT_DIR = 7B1_yn
+OUTPUT_DIR = 6B2_yn
 # OUTPUT_DIR = yesno_test
 TRAIN_DATA = BioASQ/train/BioASQ-train-6b.json 
 # TEST_DATA = BioASQ/test/BioASQ-test-NA-6b-1.json
 # TEST_DATA = BioASQ/test/BioASQ-test-NA-4b-1.json
-TEST_DATA = BioASQ/yesno/BioASQ-test-yesno-NA-7b-1.json
+TEST_DATA = BioASQ/yesno/BioASQ-test-yesno-6b-2.json
 # EVAL_DATA = BioASQ/official/Task6BGoldenEnriched/6B1_golden.json
 EVAL_DATA = BioASQ/4B1_golden.json
 
@@ -63,13 +63,14 @@ qa_merge:
 	$(BIOBERT_DIR)/$(TEST_DATA)_merged \
 	$(OUTPUT_DIR)/null_odds.json_merged
 
-qa_eval2:
+qa_eval:
 	python evaluate-v2.0.py \
 	$(BIOBERT_DIR)/$(TEST_DATA)_merged \
 	$(OUTPUT_DIR)/null_odds.json_merged \
-	-n $(OUTPUT_DIR)/null_odds.json_merged
+	-n $(OUTPUT_DIR)/null_odds.json_merged \
+	-t $(threshold)
 
-qa_convert2:
+qa_convert:
 	python convert_yesno.py \
 	$(OUTPUT_DIR)/null_odds.json_merged \
 	$(OUTPUT_DIR)/$(OUTPUT_DIR)_result.json \

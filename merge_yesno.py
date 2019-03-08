@@ -36,13 +36,14 @@ def merge(args):
     for qid in qid2ans:
         out_qid = qid.split('_')[0]
         if not out_qid in merge_score:
-            merge_score[out_qid] = 0.0
+            merge_score[out_qid] = []
             merge_cnt[out_qid] = 0.0
-        merge_score[out_qid] += na_probs[qid]
+        merge_score[out_qid].append(na_probs[qid])
         merge_cnt[out_qid] += 1
 
     assert len(qid2ans) == sum([k for k in merge_cnt.values()])
-    merge_score = {qid: merge_score[qid]/merge_cnt[qid] for qid in merge_score}
+    merge_score = {qid: sum(merge_score[qid])/merge_cnt[qid] for qid in merge_score}
+    # merge_score = {qid: min(merge_score[qid]) for qid in merge_score}
 
     # Out json
     with open(args.na_prob_out_path, 'w') as fp:
