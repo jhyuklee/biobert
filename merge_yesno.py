@@ -45,7 +45,7 @@ def merge(args):
     merge_score = {qid: sum(merge_score[qid])/merge_cnt[qid] for qid in merge_score}
     # merge_score = {qid: min(merge_score[qid]) for qid in merge_score}
 
-    # Out json
+    # Dump na_prob json
     with open(args.na_prob_out_path, 'w') as fp:
         json.dump(merge_score, fp)
 
@@ -67,7 +67,7 @@ def merge(args):
 
         to_data.append(to_article)
 
-    # Out json
+    # Dump new dataset json
     with open(args.gt_out_path, 'w') as fp:
         json.dump({'data': to_data}, fp)
 

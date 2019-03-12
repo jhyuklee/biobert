@@ -6,10 +6,11 @@ import random
 from tqdm import tqdm
 
 
-def convert(args):
+def evaluate(args):
     with open(args.na_prob_file, 'r') as fp:
         na_probs = json.load(fp)
 
+    # Make official json outfile
     out_json = {}
     for qid in na_probs:
         if na_probs[qid] > args.threshold:
@@ -21,10 +22,11 @@ def convert(args):
         json.dump(out_json, fp)
     print('File dumped as {}'.format(args.out_path))
 
-    # Evaluate
+    # If gold standard is not given, exit.
     if not os.path.exists(args.eval_file):
         return
 
+    # Eval with gold standard
     with open(args.eval_file, 'r') as fp:
         data = json.load(fp)['data']
     qid2ans = {} 
@@ -34,6 +36,7 @@ def convert(args):
                 if 'answers' in qa:
                     qid2ans[qa['id']] = qa['answers']
 
+    # Yes/No F1
     total = 0
     correct = 0
     yes = {'tp': 0, 'fp': 0, 'fn':0, 'tn':0}
@@ -80,7 +83,7 @@ def get_args():
 
 def main():
     args = get_args()
-    convert(args)
+    evaluate(args)
 
 
 if __name__ == '__main__':

@@ -48,7 +48,7 @@ f_eval:
 	../$(OUTPUT_DIR)/BioASQform_BioASQ-answer.json
 
 
-# YesNo test / merge / thresh / eval
+# YesNo test / merge / thresh / eval => required argument: threshold
 yn_test:
 	python run_qa.py \
 	--do_predict=True \
@@ -80,7 +80,7 @@ yn_thresh:
 	-t $(threshold)
 
 yn_eval:
-	python convert_yesno.py \
+	python eval_yesno.py \
 	$(OUTPUT_DIR)/null_odds.json_merged \
 	$(OUTPUT_DIR)/$(OUTPUT_DIR)_result.json \
 	--eval_file $(BIOBERT_DIR)/$(TEST_DATA)_merged \
