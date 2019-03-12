@@ -285,4 +285,5 @@ if __name__ == '__main__':
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt 
   main()
+  print('Found threshold using {}\n'.format(OPTS.na_prob_file))
 

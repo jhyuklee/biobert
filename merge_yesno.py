@@ -85,6 +85,7 @@ def get_args():
 def main():
     args = get_args()
     merge(args)
+    print('File merged as {} and {}\n'.format(args.gt_out_path, args.na_prob_out_path))
 
 
 if __name__ == '__main__':

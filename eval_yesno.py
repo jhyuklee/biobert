@@ -20,7 +20,7 @@ def evaluate(args):
 
     with open(args.out_path, 'w') as fp:
         json.dump(out_json, fp)
-    print('File dumped as {}'.format(args.out_path))
+    print('Official evaluation file dumped as {}'.format(args.out_path))
 
     # If gold standard is not given, exit.
     if not os.path.exists(args.eval_file):
