@@ -4,6 +4,8 @@ In addition to basic functionality, we also compute additional statistics and
 plot precision-recall curves if an additional na_prob.json file is provided.
 This file is expected to map question ID's to the model's predicted probability
 that a question is unanswerable.
+
+Modified for finding a threshold of Yes/No type questions in BioASQ
 """
 import argparse
 import collections

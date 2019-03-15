@@ -593,6 +593,11 @@ def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
 
   return (start_logits, end_logits)
 
+# TODO
+# Create models for SQuAD 2.0
+# 1. CLS classifier for yes/no
+# 2. No-answer Bias (Levy et al., 2018)
+
 
 def model_fn_builder(bert_config, init_checkpoint, learning_rate,
                      num_train_steps, num_warmup_steps, use_tpu,
